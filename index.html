@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Card</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fde5f0 0%, #ffc9e3 50%, #ffb3dd 100%);
+            display: flex;
+            flex-direction: column; /* Changed to column to accommodate music button */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- MUSIC BUTTON STYLE --- */
+        .music-container {
+            margin-bottom: 20px;
+            z-index: 100;
+        }
+
+        #musicBtn {
+            background: white;
+            color: #d97ba8;
+            border: 3px solid #f0b3d6;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(217, 123, 168, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #musicBtn:hover {
+            transform: scale(1.05);
+            background: #fff5fb;
+        }
+
+        #musicBtn:active {
+            transform: scale(0.95);
+        }
+
+        /* Card Container */
+        .card {
+            background: linear-gradient(135deg, #fff5fb 0%, #ffe5f0 50%, #ffd4e5 100%);
+            border-radius: 30px;
+            padding: 45px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 25px 80px rgba(255, 182, 220, 0.2), 0 0 40px rgba(255, 200, 220, 0.15);
+            border: 4px solid #f0b3d6;
+            animation: floatCard 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        /* Header and Message */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .message {
+            color: #d97ba8;
+            font-size: clamp(22px, 5vw, 32px);
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(217, 123, 168, 0.15);
+            line-height: 1.5;
+            animation: pulseText 2.5s ease-in-out infinite;
+            word-spacing: 2px;
+        }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 10px;
+            animation: fadeInGrid 1s ease-in forwards;
+        }
+
+        /* Photo Frame */
+        .photo-frame {
+            aspect-ratio: 1 / 1;
+            background: #fff0f8;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(255, 182, 220, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 3px solid #f0b3d6;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideInPhoto 0.6s ease-out forwards;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame:nth-child(2) { border-color: #e8a8c8; background: #fff5f9; }
+        .photo-frame:nth-child(2) img { object-position: center 30%; }
+
+        /* Staggered Delays */
+        .photo-frame:nth-child(1) { animation-delay: 0.1s; }
+        .photo-frame:nth-child(2) { animation-delay: 0.2s; }
+        .photo-frame:nth-child(3) { animation-delay: 0.3s; }
+        .photo-frame:nth-child(4) { animation-delay: 0.4s; }
+        .photo-frame:nth-child(5) { animation-delay: 0.5s; }
+        .photo-frame:nth-child(6) { animation-delay: 0.6s; }
+        .photo-frame:nth-child(7) { animation-delay: 0.7s; }
+        .photo-frame:nth-child(8) { animation-delay: 0.8s; }
+        .photo-frame:nth-child(9) { animation-delay: 0.9s; }
+
+        .photo-frame:hover {
+            transform: scale(1.1) rotate(-2deg);
+            z-index: 10;
+            box-shadow: 0 20px 50px rgba(217, 123, 168, 0.25);
+            border-color: #d97ba8;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); }
+        }
+
+        @keyframes pulseText {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.95; }
+        }
+
+        @keyframes slideInPhoto {
+            0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes fadeInGrid {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="music-container">
+        <button id="musicBtn">🎵 Play Music For Mama</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <div class="header">
+            <div class="message">
+                HAPPY VALENTINE'S DAY MAMA I LOVE YOU😘
+            </div>
+        </div>
+
+        <div class="photo-grid">
+            <div class="photo-frame"><img src="m1.png" alt="Photo 1"></div>
+            <div class="photo-frame"><img src="m2.png" alt="Photo 2"></div>
+            <div class="photo-frame"><img src="m3.png" alt="Photo 3"></div>
+            <div class="photo-frame"><img src="m4.png" alt="Photo 4"></div>
+            <div class="photo-frame"><img src="m5.png" alt="Photo 5"></div>
+            <div class="photo-frame"><img src="m6.png" alt="Photo 6"></div>
+            <div class="photo-frame"><img src="m7.png" alt="Photo 7"></div>
+            <div class="photo-frame"><img src="m8.png" alt="Photo 8"></div>
+            <div class="photo-frame"><img src="m9.png" alt="Photo 9"></div>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicBtn');
+
+        btn.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                btn.innerHTML = "⏸ Pause Music";
+            } else {
+                music.pause();
+                btn.innerHTML = "🎵 Play Music For Mama";
+            }
+        });
+    </script>
+</body>
+</html>
